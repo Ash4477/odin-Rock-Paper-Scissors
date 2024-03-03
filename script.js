@@ -1,15 +1,19 @@
 function getComputerChoice() {
-    const max = 3;
-    const min = 1;
-    const rand = Math.floor(Math.random()* (max-min)) + min;
-    switch (rand) {
-        case 1: 
-        return "Rock";
 
-        case 2:
-            return "Paper";
-        
-        case 3:
-            return "Scissors";
+    // This will either give 0, or 1, or 2
+    const rand = Math.floor(Math.random()* (3));
+    
+    console.log(rand);
+
+    if (rand == 0){
+        return "Rock";
+    }
+
+    else if (rand == 1) {
+        return "Paper";
+    }
+
+    else{
+        return "Scissors";
     }
 }
