@@ -36,3 +36,46 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function playGame() {
+    let playerCount = 0;
+    let compCount = 0;
+    
+    for (let i = 0; i < 5; i++) {
+        let playerSelection;
+        while (true){
+        playerSelection = prompt("Choose: Rock, Paper, or Scissors");
+        playerSelection = playerSelection.toUpperCase();
+        if ((playerSelection == "ROCK") ||
+            (playerSelection == "PAPER") ||
+            (playerSelection == "SCISSORS")) {
+                break;
+            }
+        else {
+            console.log("Invalid Input!\nEnter Again");
+        }
+        }
+        const resultString = playRound(playerSelection, getComputerChoice());
+        const checkString = resultString.substring(4,7);
+        if (checkString == "Win") {
+            playerCount++;
+        }
+        else if (checkString == "Los") {
+            compCount++;
+        }
+        
+        console.log(resultString);
+        console.log(`Score:\nPlayer: ${playerCount}\nComputer: ${compCount}`);
+    }
+
+    if (playerCount > compCount) {
+        console.log("Congrats, You Won! :>");
+    }
+    else if (playerCount < compCount) {
+        console.log("You Lost, Better Luck Next Time! :<");
+    }
+    else{
+        console.log("It's a Tie! :O");
+    }
+}
+  
+console.log(playGame());
