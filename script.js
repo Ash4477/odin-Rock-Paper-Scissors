@@ -126,7 +126,7 @@ function playGame() {
         }
     });
 
-    resultBox.appendChild(resultText);
+    resultBox.appendChild(roundResultText);
     resultBox.appendChild(scoreText);
     const body = document.querySelector("body");
     body.appendChild(rockButton);
