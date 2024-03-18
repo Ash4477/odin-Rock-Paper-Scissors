@@ -15,13 +15,28 @@ function getComputerChoice() {
     }
 }
 
+function getResult(playerCount, compCount) {
+    const matchResultText  = document.createElement("p");
+    if (playerCount > compCount) {     
+        matchResultText.textContent = "Congrats, You Won The Match!";
+    }
+    else if (playerCount < compCount) {
+        matchResultText.textContent = "You Lost, Better Luck Next Time!";
+    }
+    else{
+        matchResultText.textContent = "It's a Tie!";
+    }
+
+    return matchResultText;
+}
+
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toUpperCase();
 
     console.log(`Your Choice: ${playerSelection}\nComputer's Choice: ${computerSelection}`);
+    const roundResultText = document.createElement("p");
 
     if (playerSelection == computerSelection) {
-        return "It's a Tie";
+        roundResultText.textContent = "It's a Tie";
     }
 
     else if (
@@ -29,53 +44,48 @@ function playRound(playerSelection, computerSelection) {
          ((playerSelection == "PAPER") && (computerSelection == "SCISSORS")) || 
          ((playerSelection == "SCISSORS") && (computerSelection == "ROCK"))
          ) {
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            roundResultText.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
          }
     else {
-        return `You Win! ${playerSelection} beats ${computerSelection}`;
+        roundResultText.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
     }
+
+    return roundResultText;
 }
 
 function playGame() {
     let playerCount = 0;
     let compCount = 0;
-    
-    for (let i = 0; i < 5; i++) {
-        let playerSelection;
-        while (true){
-        playerSelection = prompt("Choose: Rock, Paper, or Scissors");
-        playerSelection = playerSelection.toUpperCase();
-        if ((playerSelection == "ROCK") ||
-            (playerSelection == "PAPER") ||
-            (playerSelection == "SCISSORS")) {
-                break;
-            }
-        else {
-            console.log("Invalid Input!\nEnter Again");
-        }
-        }
-        const resultString = playRound(playerSelection, getComputerChoice());
-        const checkString = resultString.substring(4,7);
-        if (checkString == "Win") {
-            playerCount++;
-        }
-        else if (checkString == "Los") {
-            compCount++;
-        }
-        
-        console.log(resultString);
-        console.log(`Score:\nPlayer: ${playerCount}\nComputer: ${compCount}`);
-    }
+    let playerSelection;
 
-    if (playerCount > compCount) {
-        console.log("Congrats, You Won! :>");
+    const rockButton = document.createElement("button");
+    const paperButton = document.createElement("button");
+    const scissorsButton = document.createElement("button");
+
+    rockButton.addEventListener("click", playRound("ROCK", getComputerChoice()));
+    paperButton.addEventListener("click", playRound("PAPER", getComputerChoice()));
+    scissorsButton.addEventListener("click", playRound("SCISSORS", getComputerChoice()));
+
+    const resultBox = document.createElement("div");
+
+    const body = document.querySelector("body");
+    body.appendChild(rockButton);
+    body.appendChild(paperButton);
+    body.appendChild(scissorsButton);
+    body.appendChild(resultBox);
+
+    const resultString = playRound(playerSelection, getComputerChoice());
+    const checkString = resultString.substring(4,7);
+    if (checkString == "Win") {
+        playerCount++;
     }
-    else if (playerCount < compCount) {
-        console.log("You Lost, Better Luck Next Time! :<");
+    else if (checkString == "Los") {
+        compCount++;
     }
-    else{
-        console.log("It's a Tie! :O");
-    }
+    
+    console.log(resultString);
+    console.log(`Score:\nPlayer: ${playerCount}\nComputer: ${compCount}`);
 }
+
   
-console.log(playGame());
+playGame();
