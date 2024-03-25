@@ -74,11 +74,11 @@ function updateGameStatus(playerSelection, playerCount, compCount) {
 }
 
 function checkMatchScore(playerCount, compCount) {
-    if (playerCount == 5) {
+    if (playerCount >= 5 ) {
         return 1; //    Win
     }
 
-    else if (compCount == 5) {
+    else if (compCount >= 5) {
         return -1; //   Lose
     }
 
@@ -105,6 +105,8 @@ function resetGame(result) {
         finalResult.textContent = "You Lost The Match";
     }
 
+    resetBoard.setAttribute("style", "text-align: center;");
+
     resetBoard.appendChild(finalResult);
     resetBoard.appendChild(resetButton);
     const body = document.querySelector("body");
@@ -117,6 +119,7 @@ function playGame() {
     const scissorsButton = document.querySelector("#scissors");
 
     const resultBox = document.createElement("div");
+
     let roundResultText = document.createElement("p");
     let scoreText = document.createElement("p");
 
@@ -132,25 +135,27 @@ function playGame() {
     });
     paperButton.addEventListener("click", () => {
         [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("PAPER", playerCount, compCount);
-        checkMatchScore(playerCount, compCount);
+        let gameCheck = checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
     scissorsButton.addEventListener("click", () => {
         [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("SCISSORS", playerCount, compCount);
-        checkMatchScore(playerCount, compCount);
+        let gameCheck = checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
     console.log(typeof scoreText);
 
+    resultBox.style.fontSize = "2rem";
     resultBox.appendChild(roundResultText);
     resultBox.appendChild(scoreText);
 
-    const mainScreen = document.querySelector("body");
-    mainScreen.appendChild(resultBox);
+    const body = document.querySelector("body");
+    body.style.textAlign = "center";
+    body.appendChild(resultBox);
 }
 
 
