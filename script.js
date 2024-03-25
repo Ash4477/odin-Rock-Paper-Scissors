@@ -15,6 +15,21 @@ function getComputerChoice() {
     }
 }
 
+function getResult(playerCount, compCount) {
+    const matchResultText  = document.createElement("p");
+    if (playerCount > compCount) {     
+        matchResultText.textContent = "Congrats, You Won The Match!";
+    }
+    else if (playerCount < compCount) {
+        matchResultText.textContent = "You Lost, Better Luck Next Time!";
+    }
+    else{
+        matchResultText.textContent = "It's a Tie!";
+    }
+
+    return matchResultText;
+}
+
 function playRound(playerSelection, computerSelection) {
 
     console.log(`Your Choice: ${playerSelection}\nComputer's Choice: ${computerSelection}`);
