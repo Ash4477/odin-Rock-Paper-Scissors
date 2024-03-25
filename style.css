@@ -65,3 +65,12 @@ main{
     cursor: pointer;
     transform: scale(1.2);
 }
+
+#resetBoard{
+    height: 100vh;
+    font-size: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

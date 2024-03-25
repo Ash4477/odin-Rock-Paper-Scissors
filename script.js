@@ -88,10 +88,20 @@ function checkMatchScore(playerCount, compCount) {
 }
 
 function resetGame(result) {
+
+    const body = document.body;
+    while(body.firstChild){
+        body.removeChild(body.firstChild);
+    }
+
     const resetBoard = document.createElement("div");
     const finalResult = document.createElement("p");
     const resetButton  = document.createElement("button");
-    resetButton.textContent = "Reset";
+    resetButton.textContent = "Play Again";
+    resetBoard.id = "resetBoard";
+    resetButton.setAttribute("style",
+    "margin-top: 30px; font-style: italic; font-size: 2rem; padding: 1rem 4rem; font-family: 'Lilita One', sans-serif;"
+    )
 
     resetBoard.addEventListener("click", () => {
         location.reload();
@@ -105,11 +115,10 @@ function resetGame(result) {
         finalResult.textContent = "You Lost The Match";
     }
 
-    resetBoard.setAttribute("style", "text-align: center;");
-
     resetBoard.appendChild(finalResult);
     resetBoard.appendChild(resetButton);
-    const body = document.querySelector("body");
+
+    body.setAttribute("id", "newBody");
     body.appendChild(resetBoard);
 }
 
