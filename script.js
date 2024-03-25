@@ -18,10 +18,10 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
 
     console.log(`Your Choice: ${playerSelection}\nComputer's Choice: ${computerSelection}`);
-    const roundResultText = document.createElement("p");
+    let roundResultText;
 
     if (playerSelection == computerSelection) {
-        roundResultText.textContent = "It's a Tie";
+        roundResultText= "It's a Tie";
     }
 
     else if (
@@ -29,10 +29,10 @@ function playRound(playerSelection, computerSelection) {
          ((playerSelection == "PAPER") && (computerSelection == "SCISSORS")) || 
          ((playerSelection == "SCISSORS") && (computerSelection == "ROCK"))
          ) {
-            roundResultText.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
+            roundResultText = `You Lose! ${computerSelection} beats ${playerSelection}`;
          }
     else {
-        roundResultText.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+        roundResultText = `You Win! ${playerSelection} beats ${computerSelection}`;
     }
 
     return roundResultText;
@@ -40,12 +40,12 @@ function playRound(playerSelection, computerSelection) {
 
 function updateGameStatus(playerSelection, playerCount, compCount) {
 
-    const roundResultText = document.createElement("p");
-    const scoreText = document.createElement("p");
+    let roundResultText;
+    let scoreText;
 
     roundResultText = playRound(playerSelection, getComputerChoice());
 
-    const checkString = roundResultText.getTextContent().substring(4,7);
+    const checkString = roundResultText.substring(4,7);
     if (checkString == "Win") {
         playerCount++;
     }
@@ -78,6 +78,10 @@ function resetGame(result) {
     const resetButton  = document.createElement("button");
     resetButton.textContent = "Reset";
 
+    resetBoard.addEventListener("click", () => {
+        location.reload();
+    })
+
     if (result === 1) {
         finalResult.textContent = "You Won The Match!";
     }
@@ -93,46 +97,62 @@ function resetGame(result) {
 }
 
 function playGame() {
-    const rockButton = document.createElement("button");
-    const paperButton = document.createElement("button");
-    const scissorsButton = document.createElement("button");
+    const rockButton = document.querySelector("#rock");
+    const paperButton = document.querySelector("#paper");
+    const scissorsButton = document.querySelector("#scissors");
 
     const resultBox = document.createElement("div");
-    let roundResultText;
-    let scoreText;
+    let roundResultText = document.createElement("p");
+    let scoreText = document.createElement("p");
 
     let playerCount = 0;
     let compCount = 0;
 
     rockButton.addEventListener("click", () => {
-        [roundResultText, scoreText, playerCount, compCount] = updateGameStatus("ROCK", playerCount, compCount);
+        [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("ROCK", playerCount, compCount);
         let gameCheck = checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
     paperButton.addEventListener("click", () => {
-        [roundResultText, scoreText, playerCount, compCount] = updateGameStatus("PAPER", playerCount, compCount);
+        [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("PAPER", playerCount, compCount);
         checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
     scissorsButton.addEventListener("click", () => {
-        [roundResultText, scoreText, playerCount, compCount] = updateGameStatus("SCISSORS", playerCount, compCount);
+        [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("SCISSORS", playerCount, compCount);
         checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
+    console.log(typeof scoreText);
 
     resultBox.appendChild(roundResultText);
     resultBox.appendChild(scoreText);
-    const body = document.querySelector("body");
-    body.appendChild(rockButton);
-    body.appendChild(paperButton);
-    body.appendChild(scissorsButton);
-    body.appendChild(resultBox);
+
+    const mainScreen = document.querySelector("body");
+    mainScreen.appendChild(resultBox);
 }
 
-playGame();
+
+const mainScreen = document.querySelector("main"); 
+
+const startButton = document.createElement("button");
+startButton.textContent = "Play";
+startButton.addEventListener("click", () => {
+    startButton.parentNode.removeChild(startButton);
+    const choiceBox = document.querySelectorAll(".choice-box");
+    choiceBox.forEach(function(box){
+        box.setAttribute("style", "visibility: visible;")
+    });
+    playGame();
+});
+startButton.setAttribute("style",
+"position: absolute; font-style: italic; font-size: 2rem; padding: 1rem 4rem; font-family: \"Lilita One\", sans-serif;"
+)
+
+mainScreen.appendChild(startButton);

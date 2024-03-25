@@ -3,3 +3,65 @@
     margin: 0;
     padding: 0;
 }
+
+body{
+    background: linear-gradient(
+        90deg,
+        #5f87aa,
+        #70afe3,
+        #2c91e3,
+        #024b87
+        );
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;     
+}
+
+header h1 {
+    font-style: italic;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 3rem;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4rem 0;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid red;
+}
+
+.choice-box{
+    visibility: hidden;
+    font-size: 1.5rem;
+    font-style: italic;
+    text-align: center;
+    max-width: 500px;
+    min-width: 300px;
+    min-height: 250px;
+    width: 500px;
+    border: 1px solid black;
+    background-color: #efefef;
+    border-radius: 5px;
+}
+
+.choice-box h2 {
+    margin: 5px 0;
+}
+
+.choices{
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.choices button {
+    border: 0;
+}
+
+.choices button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
