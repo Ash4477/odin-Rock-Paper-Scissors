@@ -29,7 +29,8 @@ The computer will randomly select its move.
 
 The result of the game will be displayed, and the score will be updated accordingly.
 
-Contributing
+## Contributing
 Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
 
+## Credits
 UI Inspiration by <a href="https://github.com/madzadev/rock-paper-scissors?tab=readme-ov-file" target=_blank>madzadev</a>
