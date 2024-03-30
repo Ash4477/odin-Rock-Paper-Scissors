@@ -17,8 +17,10 @@ JavaScript
 
 ## How to Play
 Clone the repository to your local machine:
-git clone https://github.com/your-username/rock-paper-scissors.git
 
+```bash
+git clone https://github.com/your-username/rock-paper-scissors.git
+```
 Open the index.html file in your web browser.
 
 Choose your move (Rock, Paper, or Scissors) by clicking the corresponding button.
