@@ -33,10 +33,8 @@ function getResult(playerCount, compCount) {
 
 function playRound(playerSelection, computerSelection) {
 
-    const compChoiceBox = document.querySelector(".choice-box:last-child");
-    const compChoiceText = document.createElement("p");
+    const compChoiceText = document.querySelector("#comp-choice");
     compChoiceText.textContent = "Comp's Choice: " + (computerSelection.toLowerCase().replace(/^\w/, c => c.toUpperCase()));
-    compChoiceBox.appendChild(compChoiceText);
 
     console.log(`Your Choice: ${playerSelection}\nComputer's Choice: ${computerSelection}`);
     let roundResultText;
@@ -157,6 +155,11 @@ function playGame() {
     const choiceText = document.createElement("p");
     const choiceBox = document.querySelector(".choice-box");
     choiceBox.appendChild(choiceText);
+
+    const compChoiceText = document.createElement("p");
+    compChoiceText.id = "comp-choice";
+    const compChoiceBox = document.querySelector(".choice-box:last-child");
+    compChoiceBox.appendChild(compChoiceText);
 
     const resultBox = document.createElement("div");
 
