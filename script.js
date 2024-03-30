@@ -1,4 +1,5 @@
 function getComputerChoice() {
+
     // This will either give 0, or 1, or 2
     const rand = Math.floor(Math.random()* (3));
 
@@ -31,6 +32,11 @@ function getResult(playerCount, compCount) {
 }
 
 function playRound(playerSelection, computerSelection) {
+
+    const compChoiceBox = document.querySelector(".choice-box:last-child");
+    const compChoiceText = document.createElement("p");
+    compChoiceText.textContent = "Comp's Choice: " + (computerSelection.toLowerCase().replace(/^\w/, c => c.toUpperCase()));
+    compChoiceBox.appendChild(compChoiceText);
 
     console.log(`Your Choice: ${playerSelection}\nComputer's Choice: ${computerSelection}`);
     let roundResultText;
@@ -97,10 +103,10 @@ function resetGame(result) {
     const resetBoard = document.createElement("div");
     const finalResult = document.createElement("p");
     const resetButton  = document.createElement("button");
-    resetButton.textContent = "Play Again";
+    resetButton.textContent = "Main Menu";
     resetBoard.id = "resetBoard";
     resetButton.setAttribute("style",
-    "margin-top: 30px; font-style: italic; font-size: 2rem; padding: 1rem 4rem; font-family: 'Lilita One', sans-serif;"
+    "margin-top: 30px; font-size: 2rem; padding: 1rem 4rem; font-family: 'Lilita One', sans-serif;"
     )
 
     resetBoard.addEventListener("click", () => {
@@ -122,10 +128,35 @@ function resetGame(result) {
     body.appendChild(resetBoard);
 }
 
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
+function compChoicesAnimation() {
+    const compChoices = document.querySelectorAll(".choices.comp button");
+    compChoices.forEach((option, index) => {
+        setTimeout(() => {
+        option.classList.add('highlight');
+        // Remove highlight class after 1 second
+        setTimeout(() => {
+            option.classList.remove('highlight');
+        }, 200);
+        }, index * 200); // Change background every second
+    });
+}
+
 function playGame() {
     const rockButton = document.querySelector("#rock");
     const paperButton = document.querySelector("#paper");
     const scissorsButton = document.querySelector("#scissors");
+
+    const choiceText = document.createElement("p");
+    const choiceBox = document.querySelector(".choice-box");
+    choiceBox.appendChild(choiceText);
 
     const resultBox = document.createElement("div");
 
@@ -136,27 +167,35 @@ function playGame() {
     let compCount = 0;
 
     rockButton.addEventListener("click", () => {
+
+        choiceText.textContent = "Your Choice: Rock";
+
         [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("ROCK", playerCount, compCount);
         let gameCheck = checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
+
     paperButton.addEventListener("click", () => {
+        choiceText.textContent = "Your Choice: Paper";
+
         [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("PAPER", playerCount, compCount);
         let gameCheck = checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
+
     scissorsButton.addEventListener("click", () => {
+        choiceText.textContent = "Your Choice: Scissors";
+
         [roundResultText.textContent, scoreText.textContent, playerCount, compCount] = updateGameStatus("SCISSORS", playerCount, compCount);
         let gameCheck = checkMatchScore(playerCount, compCount);
         if (gameCheck !== 0) {
             resetGame(gameCheck);
         }
     });
-    console.log(typeof scoreText);
 
     resultBox.style.fontSize = "2rem";
     resultBox.appendChild(roundResultText);
