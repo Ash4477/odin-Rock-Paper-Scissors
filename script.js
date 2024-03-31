@@ -36,6 +36,9 @@ function playRound(playerSelection, computerSelection) {
     const compChoiceText = document.querySelector("#comp-choice");
     compChoiceText.textContent = "Comp's Choice: " + (computerSelection.toLowerCase().replace(/^\w/, c => c.toUpperCase()));
 
+    const compChoiceImg = document.querySelector("#comp-choice-img");
+    compChoiceImg.innerHTML = `<img src = "./images/${computerSelection.toLowerCase()}.png"></img>`;
+
     console.log(`Your Choice: ${playerSelection}\nComputer's Choice: ${computerSelection}`);
     let roundResultText;
 
