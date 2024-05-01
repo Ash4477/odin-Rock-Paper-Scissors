@@ -58,6 +58,7 @@ main{
 
 .choices button {
     border: 0;
+    border: 1px solid transparent;
 }
 
 .choices.player button:hover {
